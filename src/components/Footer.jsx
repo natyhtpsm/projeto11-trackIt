@@ -28,6 +28,7 @@ export default function Footer(){
 
 const Container = styled.div`
     position: fixed;
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-around;
