@@ -6,14 +6,11 @@ export default function HomePage(){
     return(
         <Container>
             <Logo/>
-            <Login>
-                <Email placeholder="email">
-                </Email>
-                <Password placeholder="senha"></Password>
-                <Button>
-                    <h1>Entrar</h1>
-                </Button>
-            </Login>
+            <Email placeholder="email"/>
+            <Password placeholder="senha"/>
+            <Button>
+                <h1>Entrar</h1>
+            </Button>
             <SignUp>Não tem uma conta? Cadastre-se!</SignUp>
         </Container>
     );
@@ -23,28 +20,18 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: pink;
-`
-const Login = styled.div`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 100px;
-    height: 148px;
-    width: 304px;
 `
 const Button = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 303px;
-    height: 45px;
     background: #52B6FF;
     border-radius: 4.63636px;
     color: white;
+    border: none;
+    width: 303px;
+    height: 45px;
     h1{
-        width: 64px;
-        height: 26px;
         font-family: 'Lexend Deca';
         font-style: normal;
         font-weight: 400;
@@ -61,15 +48,10 @@ const Email = styled.input`
     border: 1px solid #D5D5D5;
     border-radius: 5px;
     margin-bottom: 6px;
-`
-const Password = styled.input`
-    box-sizing: border-box;
-    width: 303px;
-    height: 45px;
-    background: #FFFFFF;
-    border: 1px solid #D5D5D5;
-    border-radius: 5px;
-    margin-bottom: 6px;
+    ::placeholder {
+        color: #DBDBDB;
+        padding: 11px;
+    }
 `
 const SignUp = styled.h1`
     font-family: 'Lexend Deca';
@@ -80,4 +62,6 @@ const SignUp = styled.h1`
     text-align: center;
     text-decoration-line: underline;
     color: #52B6FF;
+    margin-top: 25px;
 `
+const Password = styled(Email)``

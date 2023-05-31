@@ -1,19 +1,17 @@
 import styled from "styled-components";
+import Image from "../assets/logo.png.png";
 
 export default function Logo(){
     return(
-        <Text>TrackIt</Text>
+        <>
+            <LogoImage src={Image}/>
+        </>
+
     );
 }
-
-const Text=styled.h1`
+const LogoImage = styled.img`
     width: 180px;
-    height: 86.23px;
-    font-family: 'Playball';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 68.982px;
-    line-height: 86px;
-    text-align: center;
-    color: #126BA5;
+    height: 178.38px;
+    margin-top: 68px;
+    margin-bottom: 32.62px;
 `
