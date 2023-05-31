@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import GlobalStyle from './style/GlobalStyle';
 import HomePage from './pages/HomePage';
 import axios from "axios";
 import Habits from './pages/Habits';
 import History from './pages/History';
 import SignUp from './pages/SignUp';
 import Today from './pages/Today';
+import ResetStyle from "./style/ResetStyle";
 
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
 
   return (
     <>
+      <GlobalStyle/>
+      <ResetStyle/>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<HomePage/>}/>
