@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import Logo from '../components/Logo'
+import Logo from '../components/Logo';
+import { Link } from 'react-router-dom';
 
 export default function HomePage(){
 
@@ -11,7 +12,9 @@ export default function HomePage(){
             <Button>
                 <h1>Entrar</h1>
             </Button>
-            <SignUp>Não tem uma conta? Cadastre-se!</SignUp>
+            <Link to='/cadastro'>
+                <SignUp>Não tem uma conta? Cadastre-se!</SignUp>
+            </Link>
         </Container>
     );
 }

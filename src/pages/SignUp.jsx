@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Logo from '../components/Logo';
+import { Link } from 'react-router-dom';
 
 export default function SignUp(){
 
@@ -13,7 +14,10 @@ export default function SignUp(){
             <Button>
                 <h1>Cadastrar</h1>
             </Button>
-            <Login>Já tem conta? Faça login!</Login>
+            <Link to='/'>
+                <Login>Já tem conta? Faça login!</Login>
+            </Link>
+
         </Container>
         
     );
