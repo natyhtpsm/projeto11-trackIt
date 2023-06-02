@@ -1,14 +1,36 @@
 import styled from "styled-components";
 import Logo from '../components/Logo';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function HomePage(){
+    const url = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login';
+
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    useEffect(() => {
+        const data = {
+            email: email,
+            password: password
+        };
+
+        const promise = axios.post(url, data);
+        promise.then(response => {
+            const responseData = response.data;
+            console.log(responseData);
+        });
+        promise.catch(erro => console.log(erro.response.data));
+
+    }, []);
+
 
     return(
         <Container>
             <Logo/>
-            <Email placeholder="email"/>
-            <Password placeholder="senha"/>
+            <Email placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <Password placeholder="senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
             <Button>
                 <h1>Entrar</h1>
             </Button>
