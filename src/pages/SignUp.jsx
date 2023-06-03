@@ -25,7 +25,6 @@ export default function SignUp(){
           .then(response => {
             const responseData = response.data;
             console.log(responseData);
-            navigate('/');
           })
           .catch(error => {
             if (error.response) {
@@ -38,14 +37,14 @@ export default function SignUp(){
     return(
         <Container>
             <Logo/>
-            <Email placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <Password placeholder="senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
-            <Name placeholder="nome" value={name} onChange={(e) => setName(e.target.value)}/>
-            <Picture placeholder="foto" value={image} onChange={(e) => setImage(e.target.value)}/>
-            <Button onClick={sendData}>
+            <Email data-test="email-input" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <Password data-test="password-input" placeholder="senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <Name data-test="user-name-input" placeholder="nome" value={name} onChange={(e) => setName(e.target.value)}/>
+            <Picture data-test="user-image-input" placeholder="foto" value={image} onChange={(e) => setImage(e.target.value)}/>
+            <Button data-test="signup-btn" onClick={sendData}>
                 <h1>Cadastrar</h1>
             </Button>
-            <Link to='/'>
+            <Link data-test="login-link" to='/'>
                 <Login>Já tem conta? Faça login!</Login>
             </Link>
 

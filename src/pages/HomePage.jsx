@@ -27,12 +27,12 @@ export default function HomePage(){
     return(
         <Container>
             <Logo/>
-            <Email placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <Password placeholder="senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
-            <Button onClick={receiveData}>
+            <Email data-test="email-input" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <Password data-test="password-input" placeholder="senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <Button data-test="login-btn" onClick={receiveData}>
                 <h1>Entrar</h1>
             </Button>
-            <Link to='/cadastro'>
+            <Link data-test="signup-link" to='/cadastro'>
                 <SignUp>Não tem uma conta? Cadastre-se!</SignUp>
             </Link>
         </Container>
