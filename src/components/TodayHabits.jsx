@@ -1,40 +1,56 @@
 import styled from 'styled-components';
 
-export default function TodayHabits(){
-
-    return(
-        <Container>
-            <Content>
-                <Text></Text>
-            </Content>
-        </Container>
-    );
-    
-    
-
+export default function TodayHabits() {
+  return (
+    <Content>
+        <Name>Nome do Habito</Name>
+      <ButtonContainer>
+        <Button>D</Button>
+        <Button>S</Button>
+        <Button>T</Button>
+        <Button>Q</Button>
+        <Button>Q</Button>
+        <Button>S</Button>
+        <Button>S</Button>
+      </ButtonContainer>
+    </Content>
+  );
 }
-    
-const Container = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    background: #E5E5E5;
-    overflow: hidden;
-`
+
 const Content = styled.div`
-    width: 340px;
-    height: 94px;
-    background: #FFFFFF;
-    border-radius: 5px;
-`
-const Text = styled.h1`
-    font-family: 'Lexend Deca';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19.976px;
-    line-height: 25px;
-    color: #666666;
-`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 340px;
+  height: 180px;
+  margin-top: 20px;
+  background: #FFFFFF;
+  border-radius: 5px;
+`;
+
+const Name = styled.h1`
+  width: 303px;
+  height: 45px;
+  margin-top: 8px;
+  background: #FFFFFF;
+`;
+
+const Button = styled.button`
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  background: #FFFFFF;
+  border: 1px solid #D5D5D5;
+  border-radius: 5px;
+  margin-left: 4px;
+  color: black;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 303px;
+  height: 45px;
+`;
