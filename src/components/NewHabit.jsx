@@ -5,7 +5,7 @@ import userContext from '../context/UserContext';
 import axios from "axios";
 
 
-export default function NewHabit() {
+export default function NewHabit(props) {
     const url = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
     const [habit, setHabit] = useState('');
     const [days, setDays] = useState([]);
@@ -13,7 +13,7 @@ export default function NewHabit() {
     const {token} = userData;
     console.log('USER DATA:', userData);
     const navigate = useNavigate();
-
+  
     function Weekdays(day) {
         if (days.includes(day)) {
             let newDays = days.filter(item => item !== day);
@@ -46,6 +46,7 @@ export default function NewHabit() {
                 }
             });
 
+            props.setShowNewHabit(false);
 
     }
 

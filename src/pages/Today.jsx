@@ -6,11 +6,13 @@ import userContext from '../context/UserContext';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
+import PercentageContext from "../context/PercentageContext";
 
 export default function Today() {
   const url = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today';
   const [habits, setHabits] = useState([]);
   const { userData } = useContext(userContext);
+  const { percentage, setPercentage } = useContext(PercentageContext);
   const { token } = userData;
 
   useEffect(() => {
@@ -54,6 +56,9 @@ export default function Today() {
           return habit;
         });
         setHabits(updatedHabits);
+        const countDone = updatedHabits.filter(habit => habit.done).length;
+        setPercentage(((countDone / updatedHabits.length) * 100).toFixed(1));
+        localStorage.setItem('percentage', JSON.stringify(percentage));
       })
       .catch((error) => {
         console.log(error);
@@ -64,6 +69,7 @@ export default function Today() {
     <Container>
       <Header />
       <Day>{dayjs().locale('pt-br').format('dddd, D MMMM')}</Day>
+      <h1>{percentage}% concluidos hj</h1>
       <Content>
         {habits.length === 0 ? (
           <Text>Nenhum hábito concluído ainda</Text>
@@ -77,7 +83,7 @@ export default function Today() {
                   <HabitDetail>{habit.highestSequence} recorde</HabitDetail>
                 </HabitDetails>
                 <HabitButton done={habit.done} onClick={() => handleHabitClick(habit.id, habit.done)}>
-                  {habit.done ? 'Feito' : 'Não feito'}
+                  {habit.done ? 'Check' : 'N check'}
                 </HabitButton>
               </HabitWrapper>
             ))}
@@ -94,7 +100,7 @@ const Container = styled.div`
   width: 100vw;
   z-index: 1;
   background: #e5e5e5;
-  overflow: hidden;
+  overflow-x: hidden;
 `;
 
 const Day = styled.h1`
@@ -103,6 +109,7 @@ const Day = styled.h1`
   font-weight: 400;
   font-size: 22.976px;
   line-height: 29px;
+  margin-top: 150px;
   color: #126ba5;
 `;
 

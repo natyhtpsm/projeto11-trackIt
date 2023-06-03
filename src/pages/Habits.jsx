@@ -6,12 +6,14 @@ import { useContext, useState, useEffect } from 'react';
 import userContext from '../context/UserContext';
 import axios from 'axios';
 import Exclude from '../assets/trash.png';
+import NewHabit from '../components/NewHabit';
 
 export default function Habits() {
   const url = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
   const [habits, setHabits] = useState([]);
   const { userData } = useContext(userContext);
   const { token } = userData;
+  const [showNewHabit, setShowNewHabit] = useState(false);
 
   useEffect(() => {
     axios
@@ -48,11 +50,14 @@ export default function Habits() {
   return (
     <Container>
       <Header />
-      <MyHabits />
+      <MyHabits setShowNewHabit={setShowNewHabit} />
+      
       <Content>
+      {showNewHabit && <NewHabit setShowNewHabit={setShowNewHabit}/>}
         {habits.length === 0 ? (
           <Text>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Text>
         ) : (
+
           habits.map((habit) => (
             <HabitWrapper key={habit.id}>
               <HabitName>{habit.name}</HabitName>

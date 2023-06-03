@@ -1,18 +1,16 @@
 import styled from "styled-components";
 import React, { useState } from 'react';
-import NewHabit from './NewHabit';
 
-export default function MyHabits() {
-  const [showNewHabit, setShowNewHabit] = useState(false);
+
+export default function MyHabits(props) {
 
   const handleAddHabit = () => {
-    setShowNewHabit(true);
+    props.setShowNewHabit(true);
   };
   return (
     <Container>
       <Text>Meus Hábitos</Text>
       <Button onClick={handleAddHabit}>+</Button>
-      {showNewHabit && <NewHabit />}
     </Container>
   );
 }

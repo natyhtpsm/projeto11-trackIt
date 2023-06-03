@@ -1,11 +1,15 @@
 import styled from "styled-components";
-export default function Header(){
+import { useContext } from "react";
+import userContext from "../context/UserContext";
 
+export default function Header(){
+    const {userData} = useContext(userContext);
+    const {image} = userData;
     return(
       
         <Container>
             <Text>TrackIt</Text>
-            <Picture/>
+            <Picture src={image}/>
         </Container>
 
     );
@@ -51,6 +55,5 @@ const Picture = styled.img`
     margin-left: auto;
     width: 51px;
     height: 51px;  
-    background: url(https://www.adobe.com/br/express/feature/image/media_142f9cf5285c2cdcda8375c1041d273a3f0383e5f.png?width=750&format=png&optimize=medium);
     border-radius: 98.5px;
 `
