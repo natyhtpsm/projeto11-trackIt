@@ -1,24 +1,72 @@
 import styled from 'styled-components';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import userContext from '../context/UserContext';
+import axios from "axios";
+
 
 export default function NewHabit() {
-  return (
-    <Content>
-      <Input></Input>
-      <ButtonContainer>
-        <Button>D</Button>
-        <Button>S</Button>
-        <Button>T</Button>
-        <Button>Q</Button>
-        <Button>Q</Button>
-        <Button>S</Button>
-        <Button>S</Button>
-      </ButtonContainer>
-      <SaveContainer>
-        <Save>Salvar</Save>
-        <Cancel>Cancelar</Cancel>
-      </SaveContainer>
-    </Content>
-  );
+    const url = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
+    const [habit, setHabit] = useState('');
+    const [days, setDays] = useState([]);
+    const {userData} = useContext(userContext);
+    const {token} = userData;
+    console.log('USER DATA:', userData);
+    const navigate = useNavigate();
+
+    function Weekdays(day) {
+        if (days.includes(day)) {
+            let newDays = days.filter(item => item !== day);
+            setDays(newDays);
+        }
+        if (!days.includes(day)) {
+            setDays([...days, day]);
+        }
+    }
+
+    function sendData() {
+
+        const data = {
+            name: habit,
+            days: days
+        };
+
+        axios
+            .post(url, data, {headers: {'Authorization': `Bearer ${token}`}})
+            .then(response => {
+                const responseData = response.data;
+                console.log(responseData);
+                navigate('/habitos');
+            })
+            .catch(error => {
+                if (error.response) {
+                    console.log(error.response.data);
+                } else {
+                    console.log(error.message);
+                }
+            });
+
+
+    }
+
+    return (
+        <Content>
+            <Input placeholder="Nome do Habito" value={habit} onChange={(e) => setHabit(e.target.value)}></Input>
+            <ButtonContainer>
+                <Button onClick={() => Weekdays('7')} style={{ background: days.includes('7') ? '#52B6FF' : '#CCCCCC' }}>D</Button>
+                <Button onClick={() => Weekdays('1')} style={{ background: days.includes('1') ? '#52B6FF' : '#CCCCCC' }}>S</Button>
+                <Button onClick={() => Weekdays('2')} style={{ background: days.includes('2') ? '#52B6FF' : '#CCCCCC' }}>T</Button>
+                <Button onClick={() => Weekdays('3')} style={{ background: days.includes('3') ? '#52B6FF' : '#CCCCCC' }}>Q</Button>
+                <Button onClick={() => Weekdays('4')} style={{ background: days.includes('4') ? '#52B6FF' : '#CCCCCC' }}>Q</Button>
+                <Button onClick={() => Weekdays('5')} style={{ background: days.includes('5') ? '#52B6FF' : '#CCCCCC' }}>S</Button>
+                <Button onClick={() => Weekdays('6')} style={{ background: days.includes('6') ? '#52B6FF' : '#CCCCCC' }}>S</Button>
+            </ButtonContainer>
+            <SaveContainer>
+                <Save onClick={() => sendData()}>Salvar</Save>
+                <Cancel>Cancelar</Cancel>
+            </SaveContainer>
+        </Content>
+    );
 }
 
 const Content = styled.div`
@@ -62,7 +110,7 @@ const ButtonContainer = styled.div`
   height: 45px;
 `;
 
-const SaveContainer =styled.div`
+const SaveContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;

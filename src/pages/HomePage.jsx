@@ -1,23 +1,29 @@
 import styled from "styled-components";
 import Logo from '../components/Logo';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import userContext from '../context/UserContext';
 
 export default function HomePage(){
     const url = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login';
     const navigate = useNavigate();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    function receiveData(){
-        const data = {
-            email: email,
-            password: password
-        };
+    const {userData, setUserData} = useContext(userContext);
 
+    function receiveData(){
+        const data = {email: email, password: password};
         const promise = axios.post(url, data);
         promise.then(response => {
             const responseData = response.data;
+            console.log(responseData);
+            localStorage.setItem('user', JSON.stringify({
+                token: responseData.token, 
+                image: responseData.image,
+                name: responseData.name,
+            }));
+            setUserData(responseData);
             console.log(responseData);
             navigate('/habitos');
         });
