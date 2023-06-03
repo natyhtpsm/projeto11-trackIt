@@ -1,6 +1,7 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import styled from 'styled-components';
+import TodayHabits from '../components/TodayHabits';
 
 export default function Today(){
 
@@ -8,6 +9,7 @@ export default function Today(){
         <Container>
             <Header/>
             <Content>
+                <TodayHabits></TodayHabits>
                 <Text>Nenhum hábito concluído ainda</Text>
             </Content>
             <Footer/>
