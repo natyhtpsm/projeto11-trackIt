@@ -1,17 +1,48 @@
 import styled from 'styled-components';
 import Logo from '../components/Logo';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
 
 export default function SignUp(){
+    const url = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up';
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [image, setImage] = useState('');
 
+    function sendData() {
+        const data = {
+          email: email,
+          name: name,
+          image: image,
+          password: password
+        };
+    
+        axios
+          .post(url, data)
+          .then(response => {
+            const responseData = response.data;
+            console.log(responseData);
+            navigate('/');
+          })
+          .catch(error => {
+            if (error.response) {
+              console.log(error.response.data); // Exibe os dados de erro retornados pelo servidor
+            } else {
+              console.log(error.message); // Exibe a mensagem de erro genérico
+            }
+          });
+    }
     return(
         <Container>
             <Logo/>
-            <Email placeholder="email"/>
-            <Password placeholder="senha"/>
-            <Name placeholder="nome"/>
-            <Picture placeholder="foto"/>
-            <Button>
+            <Email placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <Password placeholder="senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <Name placeholder="nome" value={name} onChange={(e) => setName(e.target.value)}/>
+            <Picture placeholder="foto" value={image} onChange={(e) => setImage(e.target.value)}/>
+            <Button onClick={sendData}>
                 <h1>Cadastrar</h1>
             </Button>
             <Link to='/'>
