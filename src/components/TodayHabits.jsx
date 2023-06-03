@@ -4,15 +4,9 @@ export default function TodayHabits() {
   return (
     <Content>
         <Name>Nome do Habito</Name>
-      <ButtonContainer>
-        <Button>D</Button>
-        <Button>S</Button>
-        <Button>T</Button>
-        <Button>Q</Button>
-        <Button>Q</Button>
-        <Button>S</Button>
-        <Button>S</Button>
-      </ButtonContainer>
+        <h1>Sequencia atual</h1>
+        <h1>Seu record: </h1>
+        <Button></Button>
     </Content>
   );
 }
@@ -37,20 +31,10 @@ const Name = styled.h1`
 `;
 
 const Button = styled.button`
-  box-sizing: border-box;
-  width: 30px;
-  height: 30px;
-  background: #FFFFFF;
-  border: 1px solid #D5D5D5;
-  border-radius: 5px;
-  margin-left: 4px;
-  color: black;
+    width: 69px;
+    height: 69px;
+    background: #EBEBEB;
+    border: 1px solid #E7E7E7;
+    border-radius: 5px;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 303px;
-  height: 45px;
-`;

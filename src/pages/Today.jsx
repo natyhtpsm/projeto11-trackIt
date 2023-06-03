@@ -8,9 +8,11 @@ export default function Today(){
     return(
         <Container>
             <Header/>
+            <Day>Dia da semana e data</Day>
             <Content>
                 <TodayHabits></TodayHabits>
                 <Text>Nenhum hábito concluído ainda</Text>
+                <Percentage>67% dos hábitos concluidos</Percentage>
             </Content>
             <Footer/>
         </Container>
@@ -19,13 +21,29 @@ export default function Today(){
     
 
 }
-    
+
+const Day = styled.h1`
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22.976px;
+    line-height: 29px;
+    color: #126BA5
+`
 const Container = styled.div`
 height: 100vh;
 width: 100vw;
 z-index: 1;
 background: #E5E5E5;
 overflow: hidden;
+`
+const Percentage = styled.h1`
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    color: #8FC549
 `
 
 const Content = styled.div`
@@ -35,13 +53,13 @@ display: flex;
 justify-content: center;
 `
 const Text = styled.h1`
-width: 338px;
-height: 74px;
-margin-top: 28px;
-font-family: 'Lexend Deca';
-font-style: normal;
-font-weight: 400;
-font-size: 17.976px;
-line-height: 22px;
-color: #666666;
+    width: 338px;
+    height: 74px;
+    margin-top: 28px;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    color: #666666;
 `
