@@ -69,21 +69,21 @@ export default function Today() {
   return (
     <Container>
       <Header />
-      <Day>{dayjs().locale('pt-br').format('dddd, D MMMM')}</Day>
-      <h1>{percentage}% concluídos hoje</h1>
+      <Day data-test="today">{dayjs().locale('pt-br').format('dddd, D MMMM')}</Day>
+      <h1 data-test="today-counter">{percentage}% concluídos hoje</h1>
       <Content>
         {habits.length === 0 ? (
-          <Text>Nenhum hábito concluído ainda</Text>
+          <Text data-test="today-counter">Nenhum hábito concluído ainda</Text>
         ) : (
           <>
             {habits.map((habit) => (
-              <HabitWrapper key={habit.id}>
-                <HabitName>{habit.name}</HabitName>
+              <HabitWrapper data-test="today-habit-container" key={habit.id}>
+                <HabitName data-test="today-habit-name">{habit.name}</HabitName>
                 <HabitDetails>
-                  <HabitDetail>{habit.currentSequence} dias</HabitDetail>
-                  <HabitDetail>{habit.highestSequence} recorde</HabitDetail>
+                  <HabitDetail data-test="today-habit-sequence">{habit.currentSequence} dias</HabitDetail>
+                  <HabitDetail data-test="today-habit-record">{habit.highestSequence} recorde</HabitDetail>
                 </HabitDetails>
-                <HabitButton done={habit.done} onClick={() => handleHabitClick(habit.id, habit.done)}>
+                <HabitButton data-test="today-habit-check-btn" done={habit.done} onClick={() => handleHabitClick(habit.id, habit.done)}>
                   {habit.done ? 'Check' : 'N check'}
                 </HabitButton>
               </HabitWrapper>

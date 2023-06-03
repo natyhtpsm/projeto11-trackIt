@@ -8,11 +8,11 @@ import PercentageContext from "../context/PercentageContext";
 export default function Footer(){
     const { percentage } = useContext(PercentageContext);
     return(
-        <Container>
-            <Link to='/habitos'>
+        <Container data-test="menu">
+            <Link data-test="habit-link" to='/habitos'>
                 <Habits>Hábitos</Habits>
             </Link>
-            <Link to='/hoje'>
+            <Link data-test="today-link" to='/hoje'>
                 <DivBotão>
                         <CircularProgressbar
                     value={percentage}
@@ -28,7 +28,7 @@ export default function Footer(){
                 />
                 </DivBotão>
             </Link>
-            <Link to='/historico'>
+            <Link data-test="history-link" to='/historico'>
                 <History>Histórico</History>
             </Link>
         </Container>

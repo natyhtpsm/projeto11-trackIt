@@ -51,7 +51,6 @@ export default function Habits() {
     <Container>
       <Header />
       <MyHabits setShowNewHabit={setShowNewHabit} />
-      
       <Content>
       {showNewHabit && <NewHabit setShowNewHabit={setShowNewHabit}/>}
         {habits.length === 0 ? (
@@ -59,11 +58,11 @@ export default function Habits() {
         ) : (
 
           habits.map((habit) => (
-            <HabitWrapper key={habit.id}>
-              <HabitName>{habit.name}</HabitName>
+            <HabitWrapper data-test="habit-container" key={habit.id}>
+              <HabitName data-test="habit-name">{habit.name}</HabitName>
               <HabitDays>
                 {daysOfWeek.map((day, index) => (
-                  <HabitDay
+                  <HabitDay  data-test="habit-day"
                     key={index}
                     className={habit.days.includes(index + 1) ? 'active' : ''}
                   >
@@ -71,7 +70,7 @@ export default function Habits() {
                   </HabitDay>
                 ))}
               </HabitDays>
-              <DeleteButton onClick={() => deleteHabit(habit.id)} src={Exclude} alt="Excluir Hábito" />
+              <DeleteButton  data-test="habit-delete-btn" onClick={() => deleteHabit(habit.id)} src={Exclude} alt="Excluir Hábito" />
             </HabitWrapper>
           ))
         )}

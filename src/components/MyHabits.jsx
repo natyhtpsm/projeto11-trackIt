@@ -10,7 +10,7 @@ export default function MyHabits(props) {
   return (
     <Container>
       <Text>Meus Hábitos</Text>
-      <Button onClick={handleAddHabit}>+</Button>
+      <Button data-test="habit-create-btn" onClick={handleAddHabit}>+</Button>
     </Container>
   );
 }

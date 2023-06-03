@@ -7,9 +7,9 @@ export default function Header(){
     const {image} = userData;
     return(
       
-        <Container>
+        <Container data-test="header">
             <Text>TrackIt</Text>
-            <Picture src={image}/>
+            <Picture data-test="avatar" src={image}/>
         </Container>
 
     );
