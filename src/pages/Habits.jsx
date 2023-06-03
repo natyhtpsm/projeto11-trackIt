@@ -2,12 +2,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import styled from 'styled-components';
 import MyHabits from '../components/MyHabits';
+import NewHabit from '../components/NewHabit';
 
 export default function Habits(){
     return(
         <Container>
             <Header/>
             <MyHabits/>
+            <NewHabit/>
             <Content>
                 <Text>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Text>
             </Content>

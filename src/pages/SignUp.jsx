@@ -30,9 +30,9 @@ export default function SignUp(){
           })
           .catch(error => {
             if (error.response) {
-              console.log(error.response.data); // Exibe os dados de erro retornados pelo servidor
+              console.log(error.response.data); 
             } else {
-              console.log(error.message); // Exibe a mensagem de erro genérico
+              console.log(error.message); 
             }
           });
     }
