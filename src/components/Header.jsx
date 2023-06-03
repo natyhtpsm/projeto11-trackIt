@@ -13,6 +13,7 @@ export default function Header(){
 }
 
 const Container = styled.div`
+    position: fixed;
     display: flex;
     align-itens: center;
     justify-content: center;

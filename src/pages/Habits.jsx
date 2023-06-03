@@ -2,10 +2,10 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import styled from 'styled-components';
 import MyHabits from '../components/MyHabits';
-import NewHabit from '../components/NewHabit';
 import { useContext, useState, useEffect } from 'react';
 import userContext from '../context/UserContext';
-import axios from "axios";
+import axios from 'axios';
+import Exclude from '../assets/trash.png';
 
 export default function Habits() {
   const url = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
@@ -19,7 +19,7 @@ export default function Habits() {
       .then(response => {
         const responseData = response.data;
         console.log(responseData);
-        setHabits(responseData); // Atualiza o estado com os hábitos recebidos da API
+        setHabits(responseData); 
       })
       .catch(error => {
         if (error.response) {
@@ -30,7 +30,20 @@ export default function Habits() {
       });
   }, []);
 
-  const daysOfWeek = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+  const daysOfWeek = ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'];
+
+  const deleteHabit = (habitId) => {
+    axios
+      .delete(`${url}/${habitId}`, { headers: { 'Authorization': `Bearer ${token}` } })
+      .then(response => {
+        console.log('Habit deleted successfully');
+        const updatedHabits = habits.filter(habit => habit.id !== habitId);
+        setHabits(updatedHabits);
+      })
+      .catch(error => {
+        console.log('Error deleting habit:', error);
+      });
+  };
 
   return (
     <Container>
@@ -53,6 +66,7 @@ export default function Habits() {
                   </HabitDay>
                 ))}
               </HabitDays>
+              <DeleteButton onClick={() => deleteHabit(habit.id)} src={Exclude} alt="Excluir Hábito" />
             </HabitWrapper>
           ))
         )}
@@ -67,7 +81,7 @@ const Container = styled.div`
   width: 100vw;
   z-index: 1;
   background: #E5E5E5;
-  overflow: hidden;
+  overflow-x: hidden;
 `;
 
 const Content = styled.div`
@@ -96,10 +110,10 @@ const HabitWrapper = styled.div`
   background: #FFFFFF;
   border-radius: 5px;
   margin-bottom: 10px;
+  position: relative;
 `;
 
 const HabitName = styled.div`
-  /* Estilos adicionais para o nome do hábito, se necessário */
 `;
 
 const HabitDays = styled.div`
@@ -119,4 +133,11 @@ const HabitDay = styled.div`
     background: blue;
     color: #FFFFFF;
   }
+`;
+
+const DeleteButton = styled.img`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 `;

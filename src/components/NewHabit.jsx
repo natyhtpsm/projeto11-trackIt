@@ -76,7 +76,7 @@ const Content = styled.div`
   flex-direction: column;
   width: 340px;
   height: 180px;
-  margin-top: 20px;
+  margin-top: 220px;
   background: #FFFFFF;
   border-radius: 5px;
 `;

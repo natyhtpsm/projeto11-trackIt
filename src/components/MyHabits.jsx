@@ -20,7 +20,7 @@ export default function MyHabits() {
 const Container = styled.div`
     height: 35px;
     width: 100%;
-    margin-top: 22px;
+    margin-top: 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
