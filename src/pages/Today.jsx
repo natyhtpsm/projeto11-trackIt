@@ -57,8 +57,9 @@ export default function Today() {
         });
         setHabits(updatedHabits);
         const countDone = updatedHabits.filter(habit => habit.done).length;
-        setPercentage(((countDone / updatedHabits.length) * 100).toFixed(1));
-        localStorage.setItem('percentage', JSON.stringify(percentage));
+        const newPercentage = ((countDone / updatedHabits.length) * 100).toFixed(1);
+        setPercentage(newPercentage);
+        localStorage.setItem('percentage', JSON.stringify(newPercentage));
       })
       .catch((error) => {
         console.log(error);
@@ -69,7 +70,7 @@ export default function Today() {
     <Container>
       <Header />
       <Day>{dayjs().locale('pt-br').format('dddd, D MMMM')}</Day>
-      <h1>{percentage}% concluidos hj</h1>
+      <h1>{percentage}% concluídos hoje</h1>
       <Content>
         {habits.length === 0 ? (
           <Text>Nenhum hábito concluído ainda</Text>
