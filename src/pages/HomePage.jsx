@@ -32,7 +32,8 @@ export default function HomePage() {
         console.log(responseData);
         navigate('/hoje');
       })
-      .catch(error => console.log(error.response.data))
+      .catch(error =>
+        console.log(error.response.data))
       .finally(() => {
         setIsLoading(false);
       });
