@@ -63,6 +63,7 @@ export default function Habits() {
             habits.map((habit) => (
               <HabitWrapper data-test="habit-container" key={habit.id}>
                 <HabitName data-test="habit-name">{habit.name}</HabitName>
+                <DeleteButton data-test="habit-delete-btn" onClick={() => deleteHabit(habit.id)} src={Exclude} alt="Excluir Hábito" />
                 <HabitDays>
                   {daysOfWeek.map((day, index) => (
                     <HabitDay data-test="habit-day"
@@ -73,7 +74,7 @@ export default function Habits() {
                     </HabitDay>
                   ))}
                 </HabitDays>
-                <DeleteButton data-test="habit-delete-btn" onClick={() => deleteHabit(habit.id)} src={Exclude} alt="Excluir Hábito" />
+                
               </HabitWrapper>
             ))
           )}
@@ -133,15 +134,26 @@ const HabitWrapper = styled.div`
   background: #FFFFFF;
   border-radius: 5px;
   margin-bottom: 10px;
-  
 `;
 
 const HabitName = styled.div`
+  width: 208px;
+  height: 25px;
+  font-family: 'Lexend Deca';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19.976px;
+  line-height: 25px;
+  color: #666666;
+  margin-left: 15px;
+  margin-top: 13px;
 `;
 
 const HabitDays = styled.div`
   display: flex;
   justify-content: flex-start;
+  margin-left: 15px;
+  margin-top: 10px;
 `;
 
 const HabitDay = styled.div`
@@ -149,10 +161,11 @@ const HabitDay = styled.div`
   height: 30px;
   background: #FFFFFF;
   border: 1px solid #D5D5D5;
+  color: #D4D4D4;
   border-radius: 5px;
   margin-right: 5px;
   &.active {
-    background: blue;
+    background: #D4D4D4;
     color: #FFFFFF;
   }
 `;
@@ -160,4 +173,5 @@ const HabitDay = styled.div`
 const DeleteButton = styled.img`
   position: absolute;
   cursor: pointer;
+  margin-left: 317px;
 `;

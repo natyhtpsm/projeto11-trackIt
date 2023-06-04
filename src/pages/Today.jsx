@@ -80,26 +80,30 @@ export default function Today() {
     <Container>
       <Header />
       <Day data-test="today">{dayjs().locale('pt-br').format('dddd, D MMMM')}</Day>
-      <h1 data-test="today-counter">{percentage}% concluídos hoje</h1>
-      <Content>
-        {habits.length === 0 ? (
-          <Text data-test="today-counter">Nenhum hábito concluído ainda</Text>
-        ) : (
+        {habits.every((habit) => habit.done === false) ? (
+                    <Text data-test="today-counter">Nenhum hábito concluído ainda</Text>
+                    ) : (
+                    <PercentageContainer data-test="today-counter">{percentage}% concluídos hoje</PercentageContainer>
+        )}
+        <Content>
           <>
             {habits.map((habit) => (
               <HabitWrapper data-test="today-habit-container" key={habit.id}>
-                <HabitName data-test="today-habit-name">{habit.name}</HabitName>
-                <HabitDetails>
-                  <HabitDetail data-test="today-habit-sequence">{habit.currentSequence} dias</HabitDetail>
-                  <HabitDetail data-test="today-habit-record">{habit.highestSequence} recorde</HabitDetail>
-                </HabitDetails>
-                <HabitButton data-test="today-habit-check-btn" done={habit.done} onClick={() => handleHabitClick(habit.id, habit.done)}>
-                  {habit.done ? 'Check' : 'N check'}
-                </HabitButton>
+                <div>
+                    <HabitName data-test="today-habit-name">{habit.name}</HabitName>
+                    <HabitDetails>
+                    <HabitDetail data-test="today-habit-sequence">Sequência atual: {habit.currentSequence}</HabitDetail>
+                    <HabitDetail data-test="today-habit-record">Seu recorde: {habit.highestSequence}</HabitDetail>
+                    </HabitDetails>
+                </div>
+
+                    <HabitButton data-test="today-habit-check-btn" done={habit.done} onClick={() => handleHabitClick(habit.id, habit.done)}>
+                        ✓
+                    </HabitButton>
+          
               </HabitWrapper>
             ))}
           </>
-        )}
       </Content>
       <Footer />
     </Container>
@@ -114,13 +118,26 @@ const Container = styled.div`
   overflow-x: hidden;
 `;
 
+const PercentageContainer=styled.h1`
+    width: 238px;
+    height: 22px;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    color: #8FC549;
+    margin-left: 18px;
+`
+
 const Day = styled.h1`
   font-family: 'Lexend Deca';
   font-style: normal;
   font-weight: 400;
   font-size: 22.976px;
   line-height: 29px;
-  margin-top: 150px;
+  margin-top: 98px;
+  margin-left: 18px;
   color: #126ba5;
 `;
 
@@ -131,12 +148,13 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: -50px
 `;
 
 const Text = styled.h1`
+  margin-left: 18px;
   width: 338px;
-  height: 74px;
-  margin-top: 28px;
+  height: 22px;
   font-family: 'Lexend Deca';
   font-style: normal;
   font-weight: 400;
@@ -151,24 +169,37 @@ const HabitWrapper = styled.div`
   background: #ffffff;
   border-radius: 5px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
-  padding: 10px;
   margin-bottom: 10px;
 `;
 
 const HabitName = styled.div`
-  font-family: 'Lexend Deca';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 25px;
-  color: #666666;
+    width: 208px;
+    height: 25px;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19.976px;
+    line-height: 25px;
+    color: #666666;
+    margin-left: 15px;
+    margin-top: 13px;
+    margin-bottom: 10px;
 `;
 
 const HabitDetails = styled.div`
-  display: flex;
-  justify-content: space-between;
+    width: 146px;
+    height: 32px;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12.976px;
+    line-height: 16px;
+    color: #666666;
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
 `;
 
 const HabitDetail = styled.span`
@@ -180,17 +211,20 @@ const HabitDetail = styled.span`
   color: #666666;
 `;
 
+
 const HabitButton = styled.button`
-  width: 84px;
-  height: 35px;
-  border: none;
-  border-radius: 5px;
-  background-color: ${(props) => (props.done ? '#8FC549' : '#D5D5D5')};
-  font-family: 'Lexend Deca';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  color: #ffffff;
-  cursor: pointer;
+    width: 69px;
+    height: 69px;
+    border: 1px solid #E7E7E7;
+    border-radius: 5px;
+    background-color: ${(props) => (props.done ? '#8FC549' : '#EBEBEB')};
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 20px;
+    color: #ffffff;
+    cursor: pointer;
+    margin-right: 13px;
+    margin-top: 13px;
 `;
