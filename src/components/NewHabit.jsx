@@ -11,8 +11,6 @@ export default function NewHabit(props) {
     const [days, setDays] = useState([]);
     const {userData} = useContext(userContext);
     const {token} = userData;
-    console.log('USER DATA:', userData);
-    const navigate = useNavigate();
   
     function Weekdays(day) {
         if (days.includes(day)) {
@@ -22,6 +20,10 @@ export default function NewHabit(props) {
         if (!days.includes(day)) {
             setDays([...days, day]);
         }
+    }
+
+    function cancelCreation(){
+        props.setShowNewHabit(false);
     }
 
     function sendData() {
@@ -36,7 +38,7 @@ export default function NewHabit(props) {
             .then(response => {
                 const responseData = response.data;
                 console.log(responseData);
-                navigate('/habitos');
+                window.location.reload();
             })
             .catch(error => {
                 if (error.response) {
@@ -54,17 +56,17 @@ export default function NewHabit(props) {
         <Content data-test="habit-create-container">
             <Input data-test="habit-name-input" placeholder="Nome do Habito" value={habit} onChange={(e) => setHabit(e.target.value)}></Input>
             <ButtonContainer>
-                <Button data-test="habit-day" onClick={() => Weekdays('7')} style={{ background: days.includes('7') ? '#52B6FF' : '#CCCCCC' }}>D</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays('1')} style={{ background: days.includes('1') ? '#52B6FF' : '#CCCCCC' }}>S</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays('2')} style={{ background: days.includes('2') ? '#52B6FF' : '#CCCCCC' }}>T</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays('3')} style={{ background: days.includes('3') ? '#52B6FF' : '#CCCCCC' }}>Q</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays('4')} style={{ background: days.includes('4') ? '#52B6FF' : '#CCCCCC' }}>Q</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays('5')} style={{ background: days.includes('5') ? '#52B6FF' : '#CCCCCC' }}>S</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays('6')} style={{ background: days.includes('6') ? '#52B6FF' : '#CCCCCC' }}>S</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(6)} style={{ background: days.includes(6) ? '#52B6FF' : '#CCCCCC' }}>D</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(0)} style={{ background: days.includes(0) ? '#52B6FF' : '#CCCCCC' }}>S</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(1)} style={{ background: days.includes(1) ? '#52B6FF' : '#CCCCCC' }}>T</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(2)} style={{ background: days.includes(2) ? '#52B6FF' : '#CCCCCC' }}>Q</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(3)} style={{ background: days.includes(3) ? '#52B6FF' : '#CCCCCC' }}>Q</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(4)} style={{ background: days.includes(4) ? '#52B6FF' : '#CCCCCC' }}>S</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(5)} style={{ background: days.includes(5) ? '#52B6FF' : '#CCCCCC' }}>S</Button>
             </ButtonContainer>
             <SaveContainer>
                 <Save data-test="habit-create-save-btn" onClick={() => sendData()}>Salvar</Save>
-                <Cancel data-test="habit-create-cancel-btn">Cancelar</Cancel>
+                <Cancel data-test="habit-create-cancel-btn" onClick={() => cancelCreation()}>Cancelar</Cancel>
             </SaveContainer>
         </Content>
     );
@@ -77,7 +79,7 @@ const Content = styled.div`
   flex-direction: column;
   width: 340px;
   height: 180px;
-  margin-top: 220px;
+  margin-bottom: 10px;
   background: #FFFFFF;
   border-radius: 5px;
 `;

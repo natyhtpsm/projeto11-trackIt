@@ -16,7 +16,7 @@ function App() {
 
   const [userData, setUserData] = useState(localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')):null);
   const [percentage, setPercentage] = useState(localStorage.getItem('percentage')? JSON.parse(localStorage.getItem('percentage')):0);
-  axios.defaults.headers.common['Authorization'] = 'oiB9hIuMz9ZKmrlUSboWNc1R';
+  // axios.defaults.headers.common['Authorization'] = 'oiB9hIuMz9ZKmrlUSboWNc1R';
 
   return (
     <>

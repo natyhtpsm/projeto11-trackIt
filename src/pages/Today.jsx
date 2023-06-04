@@ -25,12 +25,17 @@ export default function Today() {
     axios
       .get(url, config)
       .then((response) => {
+        console.log('antes sethabits', response);
         setHabits(response.data);
+        console.log('depois sethabits: ', habits );
+
       })
       .catch((error) => {
         console.log(error);
       });
+
   }, []);
+  console.log('depois use effect: ', habits );
 
   const handleHabitClick = (habitId, done) => {
     const config = {
@@ -46,6 +51,7 @@ export default function Today() {
     axios
       .post(endpoint, {}, config)
       .then((response) => {
+        console.log('ANTES IF: ');
         const updatedHabits = habits.map((habit) => {
           if (habit.id === habitId) {
             return {
@@ -55,11 +61,15 @@ export default function Today() {
           }
           return habit;
         });
+        console.log('DEPOIS IF: ');
+
         setHabits(updatedHabits);
         const countDone = updatedHabits.filter(habit => habit.done).length;
         const newPercentage = ((countDone / updatedHabits.length) * 100).toFixed(1);
         setPercentage(newPercentage);
         localStorage.setItem('percentage', JSON.stringify(newPercentage));
+        console.log('FINAL: ');
+
       })
       .catch((error) => {
         console.log(error);

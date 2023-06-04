@@ -21,7 +21,7 @@ export default function Habits() {
       .then(response => {
         const responseData = response.data;
         console.log(responseData);
-        setHabits(responseData); 
+        setHabits(responseData);
       })
       .catch(error => {
         if (error.response) {
@@ -50,40 +50,57 @@ export default function Habits() {
   return (
     <Container>
       <Header />
-      <MyHabits setShowNewHabit={setShowNewHabit} />
-      <Content>
-      {showNewHabit && <NewHabit setShowNewHabit={setShowNewHabit}/>}
-        {habits.length === 0 ? (
-          <Text>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Text>
-        ) : (
+      <DivMyHabits>
+        <MyHabits setShowNewHabit={setShowNewHabit} />
+      </DivMyHabits>
+      <DivContent>
+        <Content>
+          {showNewHabit && <NewHabit setShowNewHabit={setShowNewHabit} />}
+          {habits.length === 0 ? (
+            <Text>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Text>
+          ) : (
 
-          habits.map((habit) => (
-            <HabitWrapper data-test="habit-container" key={habit.id}>
-              <HabitName data-test="habit-name">{habit.name}</HabitName>
-              <HabitDays>
-                {daysOfWeek.map((day, index) => (
-                  <HabitDay  data-test="habit-day"
-                    key={index}
-                    className={habit.days.includes(index + 1) ? 'active' : ''}
-                  >
-                    {day}
-                  </HabitDay>
-                ))}
-              </HabitDays>
-              <DeleteButton  data-test="habit-delete-btn" onClick={() => deleteHabit(habit.id)} src={Exclude} alt="Excluir Hábito" />
-            </HabitWrapper>
-          ))
-        )}
-      </Content>
+            habits.map((habit) => (
+              <HabitWrapper data-test="habit-container" key={habit.id}>
+                <HabitName data-test="habit-name">{habit.name}</HabitName>
+                <HabitDays>
+                  {daysOfWeek.map((day, index) => (
+                    <HabitDay data-test="habit-day"
+                      key={index}
+                      className={habit.days.includes(index) ? 'active' : ''}
+                    >
+                      {day}
+                    </HabitDay>
+                  ))}
+                </HabitDays>
+                <DeleteButton data-test="habit-delete-btn" onClick={() => deleteHabit(habit.id)} src={Exclude} alt="Excluir Hábito" />
+              </HabitWrapper>
+            ))
+          )}
+        </Content>
+      </DivContent>
       <Footer />
     </Container>
   );
 }
 
+const DivMyHabits = styled.div`
+  display: flex;
+  align-itens: center;
+  flex-direction: column;
+`
+const DivContent = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-itens: center;
+  justify-content: center;
+  flex-direction: column;
+`
+
 const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
-  z-index: 1;
+  height: 100%;
+  width: 100%;
   background: #E5E5E5;
   overflow-x: hidden;
 `;
@@ -92,8 +109,10 @@ const Content = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
+  margin-bottom: 70px;
+  margin-left: 15px;
 `;
 
 const Text = styled.h1`
@@ -114,7 +133,7 @@ const HabitWrapper = styled.div`
   background: #FFFFFF;
   border-radius: 5px;
   margin-bottom: 10px;
-  position: relative;
+  
 `;
 
 const HabitName = styled.div`
@@ -132,7 +151,6 @@ const HabitDay = styled.div`
   border: 1px solid #D5D5D5;
   border-radius: 5px;
   margin-right: 5px;
-
   &.active {
     background: blue;
     color: #FFFFFF;
@@ -141,7 +159,5 @@ const HabitDay = styled.div`
 
 const DeleteButton = styled.img`
   position: absolute;
-  top: 10px;
-  right: 10px;
   cursor: pointer;
 `;
