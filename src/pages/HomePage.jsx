@@ -13,7 +13,7 @@ export default function HomePage() {
   const [password, setPassword] = useState();
   const { userData, setUserData } = useContext(userContext);
   const [isLoading, setIsLoading] = useState(false); 
-  
+
   function receiveData() {
     const data = { email: email, password: password };
 
@@ -30,7 +30,7 @@ export default function HomePage() {
         }));
         setUserData(responseData);
         console.log(responseData);
-        navigate('/habitos');
+        navigate('/hoje');
       })
       .catch(error => console.log(error.response.data))
       .finally(() => {
