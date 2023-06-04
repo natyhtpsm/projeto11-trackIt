@@ -56,17 +56,17 @@ export default function NewHabit(props) {
         <Content data-test="habit-create-container">
             <Input data-test="habit-name-input" placeholder="Nome do Habito" value={habit} onChange={(e) => setHabit(e.target.value)}></Input>
             <ButtonContainer>
-                <Button data-test="habit-day" onClick={() => Weekdays(6)} style={{ background: days.includes(6) ? '#52B6FF' : '#CCCCCC' }}>D</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays(0)} style={{ background: days.includes(0) ? '#52B6FF' : '#CCCCCC' }}>S</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays(1)} style={{ background: days.includes(1) ? '#52B6FF' : '#CCCCCC' }}>T</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays(2)} style={{ background: days.includes(2) ? '#52B6FF' : '#CCCCCC' }}>Q</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays(3)} style={{ background: days.includes(3) ? '#52B6FF' : '#CCCCCC' }}>Q</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays(4)} style={{ background: days.includes(4) ? '#52B6FF' : '#CCCCCC' }}>S</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays(5)} style={{ background: days.includes(5) ? '#52B6FF' : '#CCCCCC' }}>S</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(6)} style={{ background: days.includes(6) ? '#FFFFFF' : '#CFCFCF', color: days.includes(6) ? '#CFCFCF' : '#FFFFFF',}}>D</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(0)} style={{ background: days.includes(0) ? '#FFFFFF' : '#CFCFCF', color: days.includes(0) ? '#CFCFCF' : '#FFFFFF', }}>S</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(1)} style={{ background: days.includes(1) ? '#FFFFFF' : '#CFCFCF', color: days.includes(1) ? '#CFCFCF' : '#FFFFFF', }}>T</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(2)} style={{ background: days.includes(2) ? '#FFFFFF' : '#CFCFCF', color: days.includes(2) ? '#CFCFCF' : '#FFFFFF', }}>Q</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(3)} style={{ background: days.includes(3) ? '#FFFFFF' : '#CFCFCF', color: days.includes(3) ? '#CFCFCF' : '#FFFFFF', }}>Q</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(4)} style={{ background: days.includes(4) ? '#FFFFFF' : '#CFCFCF', color: days.includes(4) ? '#CFCFCF' : '#FFFFFF', }}>S</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(5)} style={{ background: days.includes(5) ? '#FFFFFF' : '#CFCFCF', color: days.includes(5) ? '#CFCFCF' : '#FFFFFF', }}>S</Button>
             </ButtonContainer>
             <SaveContainer>
-                <Save data-test="habit-create-save-btn" onClick={() => sendData()}>Salvar</Save>
                 <Cancel data-test="habit-create-cancel-btn" onClick={() => cancelCreation()}>Cancelar</Cancel>
+                <Save data-test="habit-create-save-btn" onClick={() => sendData()}>Salvar</Save>
             </SaveContainer>
         </Content>
     );
@@ -88,45 +88,47 @@ const Input = styled.input`
   box-sizing: border-box;
   width: 303px;
   height: 45px;
-  margin-top: 8px;
+  margin-top: 18px;
   background: #FFFFFF;
   border: 1px solid #D5D5D5;
   border-radius: 5px;
+  margin-bottom:10px;
 `;
 
 const Button = styled.button`
-  box-sizing: border-box;
-  width: 30px;
-  height: 30px;
-  background: #FFFFFF;
-  border: 1px solid #D5D5D5;
-  border-radius: 5px;
-  margin-left: 4px;
-  color: black;
+    width: 30px;
+    height: 40px;
+    border: 1px solid #D5D5D5;
+    color: #D4D4D4;
+    border-radius: 5px;
+    margin-right: 5px;
 `;
 
 const ButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 303px;
-  height: 45px;
+    display: flex;
+    justify-content: center;
+    margin-left: 5px;
 `;
 
 const SaveContainer = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-end;
     width: 303px;
     height: 45px;
+    margin-top: 20px;
+    margin-bottom: 15px;
 `
 const Save = styled.button`
     width: 84px;
     height: 35px;
     background: #52B6FF;
     border-radius: 4.63636px;
+    margin-left: 23px;
 `
 const Cancel = styled.button`
+    width: 69px;
+    height: 20px;
     font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
@@ -134,4 +136,5 @@ const Cancel = styled.button`
     line-height: 20px;
     text-align: center;
     color: #52B6FF;
+    background-color: white;
 `

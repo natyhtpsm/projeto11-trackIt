@@ -91,12 +91,13 @@ const DivMyHabits = styled.div`
   flex-direction: column;
 `
 const DivContent = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 100%;
   display: flex;
   align-itens: center;
   justify-content: center;
   flex-direction: column;
+  background-color:#E5E5E5;
 `
 
 const Container = styled.div`
@@ -119,7 +120,7 @@ const Content = styled.div`
 const Text = styled.h1`
   width: 338px;
   height: 74px;
-  margin-top: 28px;
+  margin-top: 8px;
   font-family: 'Lexend Deca';
   font-style: normal;
   font-weight: 400;
@@ -150,10 +151,10 @@ const HabitName = styled.div`
 `;
 
 const HabitDays = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 15px;
-  margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 15px;
+    margin-top: 10px;
 `;
 
 const HabitDay = styled.div`

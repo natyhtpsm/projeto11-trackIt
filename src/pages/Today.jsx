@@ -161,6 +161,7 @@ const Text = styled.h1`
   font-size: 17.976px;
   line-height: 22px;
   color: #666666;
+  margin-top: 18px;
 `;
 
 const HabitWrapper = styled.div`

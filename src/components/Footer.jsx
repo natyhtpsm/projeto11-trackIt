@@ -9,10 +9,10 @@ export default function Footer(){
     const { percentage } = useContext(PercentageContext);
     return(
         <Container data-test="menu">
-            <Link data-test="habit-link" to='/habitos'>
+            <Link data-test="habit-link" to='/habitos' style={{ textDecoration: 'none' }}>
                 <Habits>Hábitos</Habits>
             </Link>
-            <Link data-test="today-link" to='/hoje'>
+            <Link data-test="today-link" to='/hoje' style={{ textDecoration: 'none' }}>
                 <DivBotão>
                         <CircularProgressbar
                     value={percentage}
@@ -28,7 +28,7 @@ export default function Footer(){
                 />
                 </DivBotão>
             </Link>
-            <Link data-test="history-link" to='/historico'>
+            <Link data-test="history-link" to='/historico' style={{ textDecoration: 'none' }}>
                 <History>Histórico</History>
             </Link>
         </Container>
@@ -47,16 +47,15 @@ const Container = styled.div`
     bottom: 0px;
 `
 const DivBotão = styled.div`
-    position: absolute;
-    margin-bottom: 10px;
+    margin-bottom: 31px;
     width: 91px;
     height: 91px;
-    top: -31px;
+
 `
 const Habits = styled.h1`
     width: 68px;
     height: 22px;
-    padding: 24px;
+
     font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
@@ -69,7 +68,7 @@ const Habits = styled.h1`
 const History = styled.h1`
     width: 68px;
     height: 22px;
-    padding: 24px;
+
     font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
