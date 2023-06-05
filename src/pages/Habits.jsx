@@ -98,6 +98,9 @@ const DivContent = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color:#E5E5E5;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
 `
 
 const Container = styled.div`

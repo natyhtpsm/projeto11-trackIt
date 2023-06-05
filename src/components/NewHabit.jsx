@@ -25,7 +25,11 @@ export default function NewHabit(props) {
     }
 
     function cancelCreation() {
-        props.setShowNewHabit(false);
+
+        const confirmCancel = window.confirm("Tem certeza de que deseja cancelar a criação do hábito?");
+        if (confirmCancel) {
+            props.setShowNewHabit(false);
+        }
     }
 
     function sendData() {
@@ -49,10 +53,15 @@ export default function NewHabit(props) {
                 } else {
                     console.log(error.message);
                 }
+                if (habit.trim() === '') {
+                    alert('O nome do hábito não pode estar vazio.');
+                    return;
 
+                }
+                setIsLoading(false);
             })
             .finally(() => {
-                setIsLoading(false); 
+                setIsLoading(false);
             });
 
         props.setShowNewHabit(false);
@@ -63,16 +72,16 @@ export default function NewHabit(props) {
         <Content data-test="habit-create-container">
             <Input data-test="habit-name-input" placeholder="Nome do Habito" value={habit} disabled={isLoading} onChange={(e) => setHabit(e.target.value)}></Input>
             <ButtonContainer>
-                <Button data-test="habit-day" onClick={() => Weekdays(0)} style={{ background: days.includes(0) ? '#CFCFCF' : '#FFFFFF', color: days.includes(0) ? '#FFFFFF' : '##CFCFCF', }}>D</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays(1)} style={{ background: days.includes(1) ? '#CFCFCF' : '#FFFFFF', color: days.includes(1) ? '#FFFFFF' : '##CFCFCF', }}>S</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays(2)} style={{ background: days.includes(2) ? '#CFCFCF' : '#FFFFFF', color: days.includes(2) ? '#FFFFFF' : '##CFCFCF', }}>T</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays(3)} style={{ background: days.includes(3) ? '#CFCFCF' : '#FFFFFF', color: days.includes(3) ? '#FFFFFF' : '##CFCFCF', }}>Q</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays(4)} style={{ background: days.includes(4) ? '#CFCFCF' : '#FFFFFF', color: days.includes(4) ? '#FFFFFF' : '##CFCFCF', }}>Q</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays(5)} style={{ background: days.includes(5) ? '#CFCFCF' : '#FFFFFF', color: days.includes(5) ? '#FFFFFF' : '##CFCFCF', }}>S</Button>
-                <Button data-test="habit-day" onClick={() => Weekdays(6)} style={{ background: days.includes(6) ? '#CFCFCF' : '#FFFFFF', color: days.includes(6) ? '#FFFFFF' : '##CFCFCF', }}>S</Button>
+                <Button data-test="habit-day" disabled={isLoading} onClick={() => Weekdays(0)} style={{ background: days.includes(0) ? '#CFCFCF' : '#FFFFFF', color: days.includes(0) ? '#FFFFFF' : '##CFCFCF', }}>D</Button>
+                <Button data-test="habit-day" disabled={isLoading} onClick={() => Weekdays(1)} style={{ background: days.includes(1) ? '#CFCFCF' : '#FFFFFF', color: days.includes(1) ? '#FFFFFF' : '##CFCFCF', }}>S</Button>
+                <Button data-test="habit-day" disabled={isLoading} onClick={() => Weekdays(2)} style={{ background: days.includes(2) ? '#CFCFCF' : '#FFFFFF', color: days.includes(2) ? '#FFFFFF' : '##CFCFCF', }}>T</Button>
+                <Button data-test="habit-day" disabled={isLoading} onClick={() => Weekdays(3)} style={{ background: days.includes(3) ? '#CFCFCF' : '#FFFFFF', color: days.includes(3) ? '#FFFFFF' : '##CFCFCF', }}>Q</Button>
+                <Button data-test="habit-day" disabled={isLoading} onClick={() => Weekdays(4)} style={{ background: days.includes(4) ? '#CFCFCF' : '#FFFFFF', color: days.includes(4) ? '#FFFFFF' : '##CFCFCF', }}>Q</Button>
+                <Button data-test="habit-day" disabled={isLoading} onClick={() => Weekdays(5)} style={{ background: days.includes(5) ? '#CFCFCF' : '#FFFFFF', color: days.includes(5) ? '#FFFFFF' : '##CFCFCF', }}>S</Button>
+                <Button data-test="habit-day" disabled={isLoading} onClick={() => Weekdays(6)} style={{ background: days.includes(6) ? '#CFCFCF' : '#FFFFFF', color: days.includes(6) ? '#FFFFFF' : '##CFCFCF', }}>S</Button>
             </ButtonContainer>
             <SaveContainer>
-                <Cancel data-test="habit-create-cancel-btn" onClick={() => cancelCreation()}>Cancelar</Cancel>
+                <Cancel data-test="habit-create-cancel-btn" disabled={isLoading} onClick={() => cancelCreation()}>Cancelar</Cancel>
                 <Save data-test="habit-create-save-btn" disabled={isLoading} onClick={() => sendData()}>
                     {isLoading ? (
                         <ThreeDots

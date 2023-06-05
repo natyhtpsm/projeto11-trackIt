@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import userContext from '../context/UserContext';
 import axios from 'axios';
 import dayjs from 'dayjs';
@@ -27,7 +27,6 @@ export default function Today() {
       .then((response) => {
         console.log('antes sethabits', response);
         setHabits(response.data);
-        console.log('depois sethabits: ', habits );
 
       })
       .catch((error) => {
@@ -48,38 +47,43 @@ export default function Today() {
       ? `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitId}/uncheck`
       : `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitId}/check`;
 
-    axios
-      .post(endpoint, {}, config)
-      .then((response) => {
-        console.log('ANTES IF: ');
-        const updatedHabits = habits.map((habit) => {
-          if (habit.id === habitId) {
-            return {
-              ...habit,
-              done: !done,
-            };
-          }
-          return habit;
-        });
-        console.log('DEPOIS IF: ');
-
-        setHabits(updatedHabits);
-        const countDone = updatedHabits.filter(habit => habit.done).length;
-        const newPercentage = ((countDone / updatedHabits.length) * 100).toFixed(1);
-        setPercentage(newPercentage);
-        localStorage.setItem('percentage', JSON.stringify(newPercentage));
-        console.log('FINAL: ');
-
-      })
-      .catch((error) => {
-        console.log(error);
+      axios
+    .post(endpoint, {}, config)
+    .then((response) => {
+      const updatedHabits = habits.map((habit) => {
+        if (habit.id === habitId) {
+          const newCurrentSequence = done ? habit.currentSequence - 1 : habit.currentSequence + 1;
+          const newHighestSequence = Math.max(newCurrentSequence, habit.highestSequence);
+          const updated = true;
+          const isRecord = newCurrentSequence === newHighestSequence;
+          return {
+            ...habit,
+            done: !done,
+            currentSequence: newCurrentSequence,
+            highestSequence: newHighestSequence,
+            updated,
+            isRecord,
+          };
+        }
+        return habit;
       });
+
+      setHabits(updatedHabits);
+      const countDone = updatedHabits.filter((habit) => habit.done).length;
+      const newPercentage = ((countDone / updatedHabits.length) * 100).toFixed(1);
+      setPercentage(newPercentage);
+      localStorage.setItem('percentage', JSON.stringify(newPercentage));
+
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   return (
     <Container>
       <Header />
-      <Day data-test="today">{dayjs().locale('pt-br').format('dddd, D MMMM')}</Day>
+      <Day data-test="today">{dayjs().locale('pt-br').format('dddd, DD/MM')}</Day>
         {habits.every((habit) => habit.done === false) ? (
                     <Text data-test="today-counter">Nenhum hábito concluído ainda</Text>
                     ) : (
@@ -92,8 +96,12 @@ export default function Today() {
                 <div>
                     <HabitName data-test="today-habit-name">{habit.name}</HabitName>
                     <HabitDetails>
-                    <HabitDetail data-test="today-habit-sequence">Sequência atual: {habit.currentSequence}</HabitDetail>
-                    <HabitDetail data-test="today-habit-record">Seu recorde: {habit.highestSequence}</HabitDetail>
+                    <HabitDetail data-test="today-habit-sequence">
+                    Sequência atual: <SequenceNumber updated={habit.updated}>{habit.currentSequence}</SequenceNumber>
+                  </HabitDetail>
+                    <HabitDetail data-test="today-habit-record" >
+                      Seu recorde: <RecordNumber isRecord={habit.isRecord}>{habit.highestSequence}</RecordNumber>
+                    </HabitDetail>
                     </HabitDetails>
                 </div>
 
@@ -208,9 +216,15 @@ const HabitDetail = styled.span`
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-  color: #666666;
+  
 `;
+const SequenceNumber = styled.span`
+  color: ${(props) => (props.updated ? '#8FC549' : '#666666')};
+`;
+const RecordNumber = styled.span`
+  color: ${(props) => (props.isRecord ? '#8FC549' : '#666666')};
 
+`;
 
 const HabitButton = styled.button`
     width: 69px;
