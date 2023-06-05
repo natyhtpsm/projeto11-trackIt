@@ -70,7 +70,7 @@ export default function Today() {
 
       setHabits(updatedHabits);
       const countDone = updatedHabits.filter((habit) => habit.done).length;
-      const newPercentage = ((countDone / updatedHabits.length) * 100).toFixed(1);
+      const newPercentage = ((countDone / updatedHabits.length) * 100).toFixed(0);
       setPercentage(newPercentage);
       localStorage.setItem('percentage', JSON.stringify(newPercentage));
 
@@ -97,10 +97,10 @@ export default function Today() {
                     <HabitName data-test="today-habit-name">{habit.name}</HabitName>
                     <HabitDetails>
                     <HabitDetail data-test="today-habit-sequence">
-                    Sequência atual: <SequenceNumber updated={habit.updated}>{habit.currentSequence}</SequenceNumber>
+                    Sequência atual: <SequenceNumber updated={habit.updated}>{habit.currentSequence} dias</SequenceNumber>
                   </HabitDetail>
                     <HabitDetail data-test="today-habit-record" >
-                      Seu recorde: <RecordNumber isRecord={habit.isRecord}>{habit.highestSequence}</RecordNumber>
+                      Seu recorde: <RecordNumber isRecord={habit.isRecord}>{habit.highestSequence} dias</RecordNumber>
                     </HabitDetail>
                     </HabitDetails>
                 </div>
