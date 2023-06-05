@@ -32,7 +32,7 @@ export default function Habits() {
       });
   }, []);
 
-  const daysOfWeek = ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'];
+  const daysOfWeek = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
   const deleteHabit = (habitId) => {
     axios

@@ -145,10 +145,9 @@ const Content = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: -50px
+  margin-top: 10px;
 `;
 
 const Text = styled.h1`
