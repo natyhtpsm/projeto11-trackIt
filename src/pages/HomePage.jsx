@@ -32,8 +32,11 @@ export default function HomePage() {
         console.log(responseData);
         navigate('/hoje');
       })
-      .catch(error =>
-        console.log(error.response.data))
+      .catch(error =>{
+        console.log(error.response.data);
+        alert('Usuário ou senha errado!');
+        setIsLoading(false);
+      })
       .finally(() => {
         setIsLoading(false);
       });
@@ -68,7 +71,9 @@ export default function HomePage() {
             height={80}
             width={80}
             radius={9}
-            color="#4fa94d"
+            color="white"
+            background-color="#52B6FF"
+
             ariaLabel="three-dots-loading"
           />
         ) : (

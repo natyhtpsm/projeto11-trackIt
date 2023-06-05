@@ -1,17 +1,19 @@
 import styled from 'styled-components';
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import userContext from '../context/UserContext';
 import axios from "axios";
+import { ThreeDots } from 'react-loader-spinner';
 
 
 export default function NewHabit(props) {
     const url = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
     const [habit, setHabit] = useState('');
     const [days, setDays] = useState([]);
-    const {userData} = useContext(userContext);
-    const {token} = userData;
-  
+    const { userData } = useContext(userContext);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { token } = userData;
+
     function Weekdays(day) {
         if (days.includes(day)) {
             let newDays = days.filter(item => item !== day);
@@ -22,7 +24,7 @@ export default function NewHabit(props) {
         }
     }
 
-    function cancelCreation(){
+    function cancelCreation() {
         props.setShowNewHabit(false);
     }
 
@@ -32,9 +34,10 @@ export default function NewHabit(props) {
             name: habit,
             days: days
         };
+        setIsLoading(true);
 
         axios
-            .post(url, data, {headers: {'Authorization': `Bearer ${token}`}})
+            .post(url, data, { headers: { 'Authorization': `Bearer ${token}` } })
             .then(response => {
                 const responseData = response.data;
                 console.log(responseData);
@@ -46,17 +49,21 @@ export default function NewHabit(props) {
                 } else {
                     console.log(error.message);
                 }
+
+            })
+            .finally(() => {
+                setIsLoading(false); 
             });
 
-            props.setShowNewHabit(false);
+        props.setShowNewHabit(false);
 
     }
 
     return (
         <Content data-test="habit-create-container">
-            <Input data-test="habit-name-input" placeholder="Nome do Habito" value={habit} onChange={(e) => setHabit(e.target.value)}></Input>
+            <Input data-test="habit-name-input" placeholder="Nome do Habito" value={habit} disabled={isLoading} onChange={(e) => setHabit(e.target.value)}></Input>
             <ButtonContainer>
-                <Button data-test="habit-day" onClick={() => Weekdays(0)} style={{ background: days.includes(0) ? '#CFCFCF' : '#FFFFFF', color: days.includes(0) ? '#FFFFFF' : '##CFCFCF',}}>D</Button>
+                <Button data-test="habit-day" onClick={() => Weekdays(0)} style={{ background: days.includes(0) ? '#CFCFCF' : '#FFFFFF', color: days.includes(0) ? '#FFFFFF' : '##CFCFCF', }}>D</Button>
                 <Button data-test="habit-day" onClick={() => Weekdays(1)} style={{ background: days.includes(1) ? '#CFCFCF' : '#FFFFFF', color: days.includes(1) ? '#FFFFFF' : '##CFCFCF', }}>S</Button>
                 <Button data-test="habit-day" onClick={() => Weekdays(2)} style={{ background: days.includes(2) ? '#CFCFCF' : '#FFFFFF', color: days.includes(2) ? '#FFFFFF' : '##CFCFCF', }}>T</Button>
                 <Button data-test="habit-day" onClick={() => Weekdays(3)} style={{ background: days.includes(3) ? '#CFCFCF' : '#FFFFFF', color: days.includes(3) ? '#FFFFFF' : '##CFCFCF', }}>Q</Button>
@@ -66,7 +73,22 @@ export default function NewHabit(props) {
             </ButtonContainer>
             <SaveContainer>
                 <Cancel data-test="habit-create-cancel-btn" onClick={() => cancelCreation()}>Cancelar</Cancel>
-                <Save data-test="habit-create-save-btn" onClick={() => sendData()}>Salvar</Save>
+                <Save data-test="habit-create-save-btn" disabled={isLoading} onClick={() => sendData()}>
+                    {isLoading ? (
+                        <ThreeDots
+                            type="ThreeDots"
+                            height={80}
+                            width={80}
+                            radius={9}
+                            color="white"
+                            background-color="#52B6FF"
+                            ariaLabel="three-dots-loading"
+                        />
+                    ) : (
+                        <h1>Salvar</h1>
+                    )}
+
+                </Save>
             </SaveContainer>
         </Content>
     );
@@ -80,6 +102,7 @@ const Content = styled.div`
   width: 340px;
   height: 180px;
   margin-bottom: 10px;
+  margin-top: 40px;
   background: #FFFFFF;
   border-radius: 5px;
 `;

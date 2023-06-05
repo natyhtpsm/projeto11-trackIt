@@ -13,7 +13,7 @@ export default function SignUp() {
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Estado para controlar a exibição da animação
+  const [isLoading, setIsLoading] = useState(false); 
 
   function sendData() {
     const data = {
@@ -24,7 +24,7 @@ export default function SignUp() {
     };
 
     setIsSubmitting(true);
-    setIsLoading(true); // Ativa a exibição da animação após o clique no botão de cadastro
+    setIsLoading(true); 
 
     axios
       .post(url, data)
@@ -35,6 +35,7 @@ export default function SignUp() {
       })
       .catch(error => {
         alert('Email já cadastrado!');
+        setIsSubmitting(false);
         if (error.response) {
           console.log(error.response.data);
         } else {
@@ -42,7 +43,7 @@ export default function SignUp() {
         }
       })
       .finally(() => {
-        setIsLoading(false); // Desativa a exibição da animação após a conclusão do cadastro (com sucesso ou falha)
+        setIsLoading(false); 
       });
   }
 
@@ -83,13 +84,14 @@ export default function SignUp() {
         onClick={sendData}
         disabled={isSubmitting}
       >
-        {isLoading ? ( // Exibe a animação se isLoading for true
+        {isLoading ? ( 
           < ThreeDots
             type="ThreeDots"
             height={80}
             width={80}
             radius={9}
-            color="#4fa94d"
+            color="white"
+            background-color="#52B6FF"
             ariaLabel="three-dots-loading"
           />
         ) : (
