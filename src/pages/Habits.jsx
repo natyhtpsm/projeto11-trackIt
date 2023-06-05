@@ -35,7 +35,10 @@ export default function Habits() {
   const daysOfWeek = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
   const deleteHabit = (habitId) => {
-    axios
+    const resultado = window.confirm('Você quer apagar esse hábito?');
+
+    if(resultado){
+      axios
       .delete(`${url}/${habitId}`, { headers: { 'Authorization': `Bearer ${token}` } })
       .then(response => {
         console.log('Habit deleted successfully');
@@ -45,6 +48,8 @@ export default function Habits() {
       .catch(error => {
         console.log('Error deleting habit:', error);
       });
+    }
+
   };
 
   return (
