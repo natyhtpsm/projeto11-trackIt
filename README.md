@@ -23,25 +23,20 @@ Confira a aplicação em ação:
 ## 📚 Guia de Instalação e Uso
 
 1. **Clone o Repositório:**
-
    - `git clone https://github.com/seu-usuario/projeto-track-it.git`
    - `cd projeto-track-it`
 
 2. **Instale as Dependências:**
-
-  - `npm install`
+   - `npm install`
+    
 3. **Configure as Variáveis de Ambiente:**
-
-Crie um arquivo chamado .env na raiz do projeto com as seguintes informações:
-
-  - `REACT_APP_API_BASE_URL=https://api-track-it.herokuapp.com`
-Substitua https://api-track-it.herokuapp.com pela URL da API que será utilizada.
+   Crie um arquivo chamado .env na raiz do projeto com as seguintes informações:
+   - `REACT_APP_API_BASE_URL=https://api-track-it.herokuapp.com`
+   Substitua https://api-track-it.herokuapp.com pela URL da API que será utilizada.
 
 4. **Inicie a Aplicação:**
-
-  - `npm start`
-Isso iniciará a aplicação em modo de desenvolvimento.
+   - `npm start`
+   Isso iniciará a aplicação em modo de desenvolvimento.
 
 ## :wrench: Configuração do Banco de Dados
-
-O projeto Track It utiliza uma API para manipulação de dados relacionados a hábitos. Siga os passos abaixo para configurar a aplicação.
+   O projeto Track It utiliza uma API para manipulação de dados relacionados a hábitos. Siga os passos abaixo para configurar a aplicação.
